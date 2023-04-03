@@ -1,0 +1,19 @@
+version: "3"
+services:
+  nacos1:
+    hostname: nacosM
+    container_name: nacosM
+    image: nacos/nacos-server:latest
+    volumes:
+      # 把日志文件映射出来
+      - /opt/docker/nacos/logs/nacosM:/home/nacos/logs
+      # 把配置文件映射出来
+      - /opt//dockernacos/init.d/custom.properties:/home/nacos/init.d/custom.properties
+    environment:                       # 设置环境变量,相当于docker run命令中的-e
+      - JVM_XMS=512m
+      - JVM_XMX=512m
+      - JVM_XMN=128m
+      - MODE=standalone   #单机版
+    ports:
+      - "8848:8848"
+    restart: always
